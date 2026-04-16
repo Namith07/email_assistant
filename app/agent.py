@@ -10,7 +10,6 @@ load_dotenv()
 
 Model = Literal["model_a", "model_b"]
 
-# Map logical model names to actual Groq model IDs
 MODEL_MAP = {
     "model_a": "llama-3.3-70b-versatile",
     "model_b": "openai/gpt-oss-120b",

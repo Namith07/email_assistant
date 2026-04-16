@@ -78,19 +78,14 @@ def tone_alignment_score(email: str, tone: str) -> float:
 
 def structure_score(email: str) -> float:
     try:
-        # Normalise line endings (handles \r\n on Windows)
         email_clean = email.replace("\r\n", "\n").replace("\r", "\n")
         text_lower = email_clean.lower()
         text_norm = normalize_text(email_clean)
 
         checks = [
-            # Subject line present
             bool(re.search(r"^subject[\s:]", text_lower, re.MULTILINE)),
-            # Greeting at start of a line
             bool(re.search(r"(^|\n)(dear|hi|hello|hey)\b", text_lower)),
-            # At least one blank line separating paragraphs
             bool(re.search(r"\n\s*\n", email_clean)),
-            # Sign-off present
             any(kw in text_norm for kw in [
                 "best regards", "kind regards", "regards",
                 "sincerely", "thanks", "best", "warm regards", "yours"
